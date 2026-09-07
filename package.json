@@ -7,7 +7,9 @@
     "apps/*",
     "packages/*"
   ],
-  "scripts": {},
+  "scripts": {
+    "dev:api": "pnpm --dir apps/api dev"
+  },
   "keywords": [
     "3d-printing",
     "management",
