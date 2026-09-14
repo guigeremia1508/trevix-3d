@@ -1,20 +1,32 @@
 {
-  "name": "trevix-3d",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Sistema de gestão para impressão 3D",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "name": "gestao3d",
+  "version": "3.3.2",
+  "description": "Gestão de empresa de impressão 3D",
+  "main": "server.js",
   "scripts": {
-    "dev:api": "pnpm --dir apps/api dev"
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "import:sqlite": "node scripts/import-sqlite.js",
+    "test": "node --test tests/quality.test.js",
+    "check": "node --test tests/quality.test.js && node scripts/self-test.js && node scripts/security-smoke.js",
+    "security:smoke": "node scripts/security-smoke.js",
+    "test:quality": "node --test tests/quality.test.js",
+    "predeploy": "node scripts/predeploy-check.js"
   },
-  "keywords": [
-    "3d-printing",
-    "management",
-    "production"
-  ],
-  "author": "Trevix 3D",
-  "license": "UNLICENSED"
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "pg": "^8.13.1",
+    "sql.js": "^1.12.0",
+    "argon2": "^0.44.0",
+    "express-rate-limit": "^8.2.1"
+  }
 }

@@ -1,7 +1,0 @@
-allowBuilds:
-  '@prisma/engines': true
-  argon2: set this to true or false
-  esbuild: false
-  msgpackr-extract: false
-  prisma: true
-  workerd: false

@@ -1,18 +1,24 @@
-version: '3.8'
-
 services:
   db:
-    image: postgres:15
-    container_name: trevix_db
-    restart: always
+    image: postgres:16-alpine
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: trevix_db
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: gestao3d
+      POSTGRES_USER: gestao3d
+      POSTGRES_PASSWORD: gestao3d_dev_change_me
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
+      - postgres-data:/var/lib/postgresql/data
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://gestao3d:gestao3d_dev_change_me@db:5432/gestao3d
+      INITIAL_ADMIN_EMAIL: admin@local.test
+      INITIAL_ADMIN_PASSWORD: change-me-now
+    restart: unless-stopped
 volumes:
-  postgres_data:
+  postgres-data:

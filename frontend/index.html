@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão 3D 3.3.2</title>
+  <meta name="theme-color" content="#6c63ff">
+  <meta name="description" content="Gestão profissional para fabricação digital e impressão 3D">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- LOGIN / CADASTRO -->
+<div id="login-screen">
+  <div class="login-card">
+    <h1>🖨️ Gestão 3D</h1>
+    <p>Impressão 3D & Fabricação Digital</p>
+
+    <div id="login-form" class="form-grid full">
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="login-email" placeholder="seu@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary"  style="width:100%;justify-content:center;padding:.7rem">Entrar</button>
+      <div id="login-error" style="color:var(--red);font-size:.85rem;display:none"></div>
+      <button type="button" class="auth-link" >Criar conta</button>
+    </div>
+
+    <div id="register-form" class="form-grid full" style="display:none">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" id="register-name" placeholder="Seu nome" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" id="register-email" placeholder="seu@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="register-pass" placeholder="Mínimo de 8 caracteres" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label>Confirmar senha</label>
+        <input type="password" id="register-pass-confirm" placeholder="Digite a senha novamente" autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label>Código de convite</label>
+        <input type="text" id="register-invite" placeholder="Peça ao administrador">
+      </div>
+      <button class="btn btn-primary"  style="width:100%;justify-content:center;padding:.7rem">Criar conta</button>
+      <div id="register-error" style="color:var(--red);font-size:.85rem;display:none"></div>
+      <button type="button" class="auth-link" >Voltar para entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+  <div class="mobile-overlay" id="mobile-overlay" onclick="closeSidebar()"></div>
+  <div id="sidebar">
+    <div class="sidebar-logo">
+      <h2>🖨️ Gestão 3D</h2>
+      <span>Impressão & Fabricação Digital</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="navigate('dashboard')" data-page="dashboard"><span class="icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="navigate('projetos')" data-page="projetos"><span class="icon">📁</span> Projetos</div>
+      <div class="nav-item" onclick="navigate('testes')" data-page="testes"><span class="icon">🧪</span> Testes</div>
+      <div class="nav-item" onclick="navigate('produtos')" data-page="produtos"><span class="icon">📦</span> Produtos</div>
+      <div class="nav-item" onclick="navigate('pedidos')" data-page="pedidos"><span class="icon">🛒</span> Pedidos</div>
+      <div class="nav-item" onclick="navigate('orcamentos')" data-page="orcamentos"><span class="icon">💰</span> Orçamentos</div>
+      <div class="nav-item" onclick="navigate('producao')" data-page="producao"><span class="icon">⚙️</span> Produção</div>
+      <div class="nav-item" onclick="navigate('impressoras')" data-page="impressoras"><span class="icon">🖨️</span> Impressoras & Manutenção</div>
+      <div class="nav-item" onclick="navigate('estoque')" data-page="estoque"><span class="icon">🗃️</span> Filamentos</div>
+      <div class="nav-item" onclick="navigate('ferramentas')" data-page="ferramentas"><span class="icon">🧰</span> Ferramentas & Consumíveis</div>
+      <div class="nav-item" onclick="navigate('pecas')" data-page="pecas"><span class="icon">🔩</span> Parafusos & Peças</div>
+      <div class="nav-item" onclick="navigate('clientes')" data-page="clientes"><span class="icon">👥</span> Clientes</div>
+      <div class="nav-item" onclick="navigate('financeiro')" data-page="financeiro"><span class="icon">💰</span> Financeiro</div>
+      <div class="nav-item" onclick="navigate('envios')" data-page="envios"><span class="icon">🚚</span> Envios</div>
+      <div class="nav-item" onclick="navigate('relatorios')" data-page="relatorios"><span class="icon">📈</span> Relatórios</div>
+      <div class="nav-item" onclick="navigate('calculadora')" data-page="calculadora"><span class="icon">🧮</span> Calculadora</div>
+      <div class="nav-item admin-nav" onclick="navigate('auditoria')" data-page="auditoria"><span class="icon">🛡️</span> Auditoria</div>
+      <div class="nav-item" onclick="navigate('configuracoes')" data-page="configuracoes"><span class="icon">⚙️</span> Configurações</div>
+    </nav>
+    <div class="sidebar-user">
+      <span>Logado como</span>
+      <strong id="user-name">—</strong>
+      <button class="btn btn-secondary btn-sm" style="margin-top:.5rem;width:100%;justify-content:center" onclick="doLogout()">Sair</button>
+    </div>
+  </div>
+
+  <div id="main">
+    <div id="topbar">
+      <div style="display:flex;align-items:center;gap:.75rem">
+        <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h2 id="page-title">Dashboard</h2>
+      </div>
+      <div class="topbar-info">
+        <div class="global-search"><input id="global-search" class="global-search-input" placeholder="Buscar…" autocomplete="off" oninput="globalSearch(this.value)" onkeydown="if(event.key==='Escape')closeSearch()"><div id="global-search-results" class="global-search-results"></div></div>
+        <button class="icon-btn" id="notifications-button" type="button" onclick="openNotifications()" aria-label="Notificações">🔔<span id="notifications-count" class="nav-badge" style="display:none">0</span></button>
+        <div class="weather-widget" id="weather-widget" title="Clima atual">
+          <span id="weather-icon">🌤️</span>
+          <span id="weather-text">Clima: carregando...</span>
+        </div>
+        <button class="theme-toggle" id="theme-toggle" type="button" onclick="toggleTheme()" aria-label="Alternar tema">
+          <span id="theme-icon">☀️</span>
+          <span id="theme-label">Claro</span>
+        </button>
+        <div class="topbar-clock">
+          <span id="topbar-date"></span>
+          <strong id="topbar-time"></strong>
+        </div>
+      </div>
+    </div>
+    <div id="content"></div>
+  </div>
+</div>
+
+<script src="/js/api.js?v=3.3.2"></script>
+<script>window.pageRenderers = window.pageRenderers || {};</script>
+<script src="/js/app.js?v=3.3.2"></script>
+<script src="/js/modules/dashboard.js?v=3.3.2"></script>
+<script src="/js/modules/clientes.js?v=3.3.2"></script>
+<script src="/js/modules/impressoras.js?v=3.3.2"></script>
+<script src="/js/modules/estoque.js?v=3.3.2"></script>
+<script src="/js/modules/ferramentas.js?v=3.3.2"></script>
+<script src="/js/modules/pecas.js?v=3.3.2"></script>
+<script src="/js/modules/projetos.js?v=3.3.2"></script>
+<script src="/js/modules/testes.js?v=3.3.2"></script>
+<script src="/js/modules/produtos.js?v=3.3.2"></script>
+<script src="/js/modules/pedidos.js?v=3.3.2"></script>
+<script src="/js/modules/orcamentos.js?v=3.3.2"></script>
+<script src="/js/modules/producao.js?v=3.3.2"></script>
+<script src="/js/modules/financeiro.js?v=3.3.2"></script>
+<script src="/js/modules/relatorios.js?v=3.3.2"></script>
+<script src="/js/modules/configuracoes.js?v=3.3.2"></script>
+<script src="/js/modules/calculadora.js?v=3.3.2"></script>
+<script src="/js/modules/auditoria.js?v=3.3.2"></script>
+<script src="/js/modules/notificacoes.js?v=3.3.2"></script>
+<script src="/js/modules/envios.js?v=3.3.3"></script>
+<script src="/js/auth.js?v=3.3.2"></script>
+<script src="/js/bootstrap.js?v=3.3.2"></script>
+</body>
+</html>

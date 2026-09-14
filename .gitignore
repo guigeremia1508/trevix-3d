@@ -1,33 +1,16 @@
-# Dependencies
 node_modules/
-
-# Environment variables
 .env
 .env.*
 !.env.example
-
-# Build output
+*.log
+.DS_Store
+.vscode/
 dist/
 build/
 coverage/
-
-# Logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-
-# Temporary files
-*.tmp
-*.temp
-
-# Prisma local/generated artifacts
-*.db
-*.db-journal
+uploads/
+backups/
+*.backup
+*.dump
+*.sql.gz
+secrets/
